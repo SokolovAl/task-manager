@@ -1,8 +1,9 @@
-import {useQuery} from "@apollo/client";
+import {useMutation, useQuery} from "@apollo/client";
 import {GET_TASKS} from "../graphql/queries";
 import React from "react";
 import {TaskItem} from "./TaskItem";
 import {AddTask} from "./AddTask";
+import {UPDATE_TASK} from "../graphql/mutations";
 
 interface Task {
     id: string,
@@ -12,6 +13,7 @@ interface Task {
 
 export const TaskList: React.FC = () => {
     const {loading, error, data, refetch} = useQuery(GET_TASKS)
+    const [updateTask] = useMutation(UPDATE_TASK)
 
     if (loading) {
         return <p>Loading...</p>
@@ -27,12 +29,23 @@ export const TaskList: React.FC = () => {
         await refetch();
     };
 
+    const handleUpdateTask = async (taskId: string, isDone: boolean) => {
+        try {
+            await updateTask({
+                variables: {id: taskId, isDone}
+            })
+            await refetch()
+        } catch (error) {
+            console.error(`Error updating task: ${error}`)
+        }
+    }
+
     return (
         <div>
             <h2>Task List</h2>
             <ul>
                 {tasks.map((task) => (
-                    <TaskItem key = {task.id} task = {task}/>
+                    <TaskItem key = {task.id} task = {task} onToggleDone = {handleUpdateTask}/>
                 ))}
             </ul>
             <AddTask onAddTask = {handleAddTask}/>
