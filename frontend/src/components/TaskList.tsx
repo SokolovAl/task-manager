@@ -1,5 +1,7 @@
 import {useQuery} from "@apollo/client";
 import {GET_TASKS} from "../graphql/queries";
+import React from "react";
+import {TaskItem} from "./TaskItem";
 
 interface Task {
     id: string,
@@ -25,13 +27,7 @@ export const TaskList: React.FC = () => {
             <h2>Task List</h2>
             <ul>
                 {tasks.map((task) => (
-                    <li key = {task.id}>
-                        <input
-                            type = "checkbox"
-                            checked = {task.isDone}
-                        />
-                        {task.text}
-                    </li>
+                    <TaskItem key = {task.id} task = {task}/>
                 ))}
             </ul>
         </div>
