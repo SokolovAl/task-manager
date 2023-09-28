@@ -15,12 +15,8 @@ export const resolvers = {
             return newTask;
         },
 
-        updateTask: (obj, {id, text, isDone}, context) => {
+        updateTask: (obj, {id, isDone}, context) => {
             const taskIndex = findTaskIndexById(context.tasks, id);
-
-            if (text !== undefined) {
-                context.tasks[taskIndex].text = text;
-            }
 
             if (isDone !== undefined) {
                 context.tasks[taskIndex].isDone = isDone;
