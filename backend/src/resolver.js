@@ -22,7 +22,7 @@ export const resolvers = {
                 context.tasks[taskIndex].text = text;
             }
 
-            if (text !== undefined) {
+            if (isDone !== undefined) {
                 context.tasks[taskIndex].isDone = isDone;
             }
 
@@ -31,15 +31,15 @@ export const resolvers = {
 
         deleteTask: (obj, {id}, context) => {
             const taskIndex = findTaskIndexById(context.tasks, id);
-            const deletedTask = context.tasks.splice(taskIndex, 1)[0];
 
-            return deletedTask;
+            return context.tasks.splice(taskIndex, 1)[0];
         }
     }
 };
 
 const findTaskIndexById = (tasks, id) => {
     const taskIndex = tasks.findIndex((task) => task.id === id);
+
     if (taskIndex === -1) {
         throw new Error("Task not found");
     }
