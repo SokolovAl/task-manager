@@ -5,7 +5,7 @@ export const GET_TASKS = gql`
         tasks {
             id
             text
-            completed
+            isDone
         }
     }
 `;
