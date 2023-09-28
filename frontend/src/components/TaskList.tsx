@@ -40,12 +40,21 @@ export const TaskList: React.FC = () => {
         }
     }
 
+    const handleDeleteTask = async (taskId: string) => {
+        await refetch()
+    }
+
     return (
         <div>
             <h2>Task List</h2>
             <ul>
                 {tasks.map((task) => (
-                    <TaskItem key = {task.id} task = {task} onToggleDone = {handleUpdateTask}/>
+                    <TaskItem
+                        key = {task.id}
+                        task = {task}
+                        onUpdateTask = {handleUpdateTask}
+                        onDeleteTask = {handleDeleteTask}
+                    />
                 ))}
             </ul>
             <AddTask onAddTask = {handleAddTask}/>
