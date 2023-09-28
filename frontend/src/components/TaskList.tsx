@@ -2,6 +2,7 @@ import {useQuery} from "@apollo/client";
 import {GET_TASKS} from "../graphql/queries";
 import React from "react";
 import {TaskItem} from "./TaskItem";
+import {AddTask} from "./AddTask";
 
 interface Task {
     id: string,
@@ -10,7 +11,7 @@ interface Task {
 }
 
 export const TaskList: React.FC = () => {
-    const {loading, error, data} = useQuery(GET_TASKS)
+    const {loading, error, data, refetch} = useQuery(GET_TASKS)
 
     if (loading) {
         return <p>Loading...</p>
@@ -22,6 +23,10 @@ export const TaskList: React.FC = () => {
 
     const tasks: Task[] = data.tasks;
 
+    const handleAddTask = async () => {
+        await refetch();
+    };
+
     return (
         <div>
             <h2>Task List</h2>
@@ -30,6 +35,7 @@ export const TaskList: React.FC = () => {
                     <TaskItem key = {task.id} task = {task}/>
                 ))}
             </ul>
+            <AddTask onAddTask = {handleAddTask}/>
         </div>
     )
 }
