@@ -1,6 +1,13 @@
 import React from "react";
 import {useMutation} from "@apollo/client";
 import {DELETE_TASK, UPDATE_TASK} from "../graphql/mutations";
+import ListItem from "@mui/material/ListItem";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Typography from "@mui/material/Typography";
 
 interface Task {
     id: string;
@@ -13,7 +20,7 @@ interface TaskItemProps {
     refetch: () => void
 }
 
-export const TaskItem: React.FC<TaskItemProps> = ({task,refetch}) => {
+export const TaskItem: React.FC<TaskItemProps> = ({task, refetch}) => {
     const [deleteTask] = useMutation(DELETE_TASK)
     const [updateTask] = useMutation(UPDATE_TASK)
 
@@ -40,14 +47,25 @@ export const TaskItem: React.FC<TaskItemProps> = ({task,refetch}) => {
     }
 
     return (
-        <li>
-            <input
-                type = "checkbox"
+        <ListItem>
+            <Checkbox
+                color = "primary"
                 checked = {task.isDone}
                 onChange = {handleUpdateTask}
             />
-            <span>{task.text} - {task.isDone ? 'Completed' : 'Not completed'}</span>
-            <button onClick = {handleDeleteTask}>Delete</button>
-        </li>
+            <ListItemText
+                primary = {task.text}
+                secondary = {
+                    <Typography variant = "body2">
+                        {task.isDone ? 'Completed' : 'Not completed'}
+                    </Typography>
+                }
+            />
+            <ListItemSecondaryAction>
+                <IconButton edge = "end" aria-label = "delete" color = "error" onClick = {handleDeleteTask}>
+                    <DeleteIcon/>
+                </IconButton>
+            </ListItemSecondaryAction>
+        </ListItem>
     );
 };

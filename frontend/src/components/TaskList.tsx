@@ -1,8 +1,10 @@
+import React from "react";
 import {useQuery} from "@apollo/client";
 import {GET_TASKS} from "../graphql/queries";
-import React from "react";
 import {TaskItem} from "./TaskItem";
 import {AddTask} from "./AddTask";
+import List from "@mui/material/List";
+import Box from "@mui/material/Box";
 
 interface Task {
     id: string,
@@ -24,9 +26,12 @@ export const TaskList: React.FC = () => {
     const tasks: Task[] = data.tasks;
 
     return (
-        <div>
-            <h2>Task List</h2>
-            <ul>
+        <>
+            <List
+                sx={{
+                    minWidth:"30%"
+                }}
+            >
                 {tasks.map((task) => (
                     <TaskItem
                         key = {task.id}
@@ -34,8 +39,8 @@ export const TaskList: React.FC = () => {
                         refetch = {refetch}
                     />
                 ))}
-            </ul>
+            </List>
             <AddTask refetch = {refetch}/>
-        </div>
+        </>
     )
 }

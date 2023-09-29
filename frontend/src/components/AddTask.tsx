@@ -1,6 +1,10 @@
 import React, {useState} from "react";
 import {useMutation} from "@apollo/client";
 import {CREATE_TASK} from "../graphql/mutations";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 interface AddTaskProps {
     refetch: () => void
@@ -32,15 +36,27 @@ export const AddTask: React.FC<AddTaskProps> = ({refetch}) => {
     }
 
     return (
-        <div>
-            <h2>Add a New Task</h2>
-            <input
-                type = "text"
-                placeholder = "Task text"
+        <Box
+            sx = {{
+                display: "flex",
+                flexDirection: "column",
+                gap: 3
+            }}
+        >
+            <Typography variant = "h4">Add a New Task</Typography>
+            <TextField
+                label = "Task description"
+                variant = "outlined"
                 value = {taskText}
                 onChange = {handleInputChange}
             />
-            <button onClick = {handleAddTask}>Add Task</button>
-        </div>
+            <Button
+                variant = "contained"
+                color = "primary"
+                onClick = {handleAddTask}
+            >
+                Add Task
+            </Button>
+        </Box>
     )
 }
