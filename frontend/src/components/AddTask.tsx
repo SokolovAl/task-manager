@@ -1,17 +1,14 @@
 import React, {useState} from "react";
 import {useMutation} from "@apollo/client";
 import {CREATE_TASK} from "../graphql/mutations";
-import {GET_TASKS} from "../graphql/queries";
 
 interface AddTaskProps {
-    onAddTask: () => void
+    refetch: () => void
 }
 
-export const AddTask: React.FC<AddTaskProps> = ({onAddTask}) => {
+export const AddTask: React.FC<AddTaskProps> = ({refetch}) => {
     const [taskText, setTaskText] = useState<string>("")
-    const [createTask] = useMutation(CREATE_TASK, {
-        refetchQueries: [{query: GET_TASKS}]
-    })
+    const [createTask] = useMutation(CREATE_TASK)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTaskText(event.target.value)
@@ -28,7 +25,7 @@ export const AddTask: React.FC<AddTaskProps> = ({onAddTask}) => {
             })
 
             setTaskText("")
-            onAddTask()
+            refetch();
         } catch (error) {
             console.error(`Error adding task ${error}`)
         }

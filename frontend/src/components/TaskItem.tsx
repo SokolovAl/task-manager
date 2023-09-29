@@ -10,11 +10,10 @@ interface Task {
 
 interface TaskItemProps {
     task: Task;
-    onUpdateTask: (taskId: string, isDone: boolean) => void;
-    onDeleteTask: (taskId: string) => void;
+    refetch: () => void
 }
 
-export const TaskItem: React.FC<TaskItemProps> = ({task, onUpdateTask, onDeleteTask}) => {
+export const TaskItem: React.FC<TaskItemProps> = ({task,refetch}) => {
     const [deleteTask] = useMutation(DELETE_TASK)
     const [updateTask] = useMutation(UPDATE_TASK)
 
@@ -22,9 +21,8 @@ export const TaskItem: React.FC<TaskItemProps> = ({task, onUpdateTask, onDeleteT
     const handleUpdateTask = async () => {
         try {
             await updateTask({
-                variables: {id: task.id, isDone: task.isDone}
+                variables: {id: task.id, isDone: !task.isDone}
             })
-            onUpdateTask(task.id, !task.isDone)
         } catch (error) {
             console.error(`Error updating task: ${error}`)
         }
@@ -35,7 +33,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({task, onUpdateTask, onDeleteT
             await deleteTask({
                 variables: {id: task.id}
             })
-            onDeleteTask(task.id)
+            refetch()
         } catch (error) {
             console.error(`Error deleting task: ${error}`)
         }

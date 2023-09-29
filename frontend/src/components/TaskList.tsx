@@ -1,9 +1,8 @@
-import {useMutation, useQuery} from "@apollo/client";
+import {useQuery} from "@apollo/client";
 import {GET_TASKS} from "../graphql/queries";
 import React from "react";
 import {TaskItem} from "./TaskItem";
 import {AddTask} from "./AddTask";
-import {UPDATE_TASK} from "../graphql/mutations";
 
 interface Task {
     id: string,
@@ -13,7 +12,6 @@ interface Task {
 
 export const TaskList: React.FC = () => {
     const {loading, error, data, refetch} = useQuery(GET_TASKS)
-    const [updateTask] = useMutation(UPDATE_TASK)
 
     if (loading) {
         return <p>Loading...</p>
@@ -25,25 +23,6 @@ export const TaskList: React.FC = () => {
 
     const tasks: Task[] = data.tasks;
 
-    const handleAddTask = async () => {
-        await refetch();
-    };
-
-    const handleUpdateTask = async (taskId: string, isDone: boolean) => {
-        try {
-            await updateTask({
-                variables: {id: taskId, isDone}
-            })
-            await refetch()
-        } catch (error) {
-            console.error(`Error updating task: ${error}`)
-        }
-    }
-
-    const handleDeleteTask = async (taskId: string) => {
-        await refetch()
-    }
-
     return (
         <div>
             <h2>Task List</h2>
@@ -52,12 +31,11 @@ export const TaskList: React.FC = () => {
                     <TaskItem
                         key = {task.id}
                         task = {task}
-                        onUpdateTask = {handleUpdateTask}
-                        onDeleteTask = {handleDeleteTask}
+                        refetch = {refetch}
                     />
                 ))}
             </ul>
-            <AddTask onAddTask = {handleAddTask}/>
+            <AddTask refetch = {refetch}/>
         </div>
     )
 }
