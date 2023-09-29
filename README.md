@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# Task Manager App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple Task Manager application with a frontend built using React, TypeScript, Material UI and a backend
+powered by GraphQL, Express.js, Node.js
+The app allows you to manage a list of tasks, including adding new tasks, marking them as completed, and
+deleting them.
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+- **Frontend**:
+    - React: A popular JavaScript library for building user interfaces.
+    - Apollo Client: A client for consuming GraphQL APIs in React applications.
+    - Material-UI: A popular React UI framework for building responsive and attractive user interfaces.
+    - TypeScript: A statically typed superset of JavaScript for improved code quality.
 
-### `npm start`
+- **Backend**:
+    - Express: A minimal and flexible Node.js web application framework.
+    - GraphQL: A query language for APIs that allows you to request only the data you need.
+    - Express-graphql: A library for building GraphQL servers in Node.js.
+    - Cors: Middleware for enabling Cross-Origin Resource Sharing (CORS) in the Express application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- View a list of tasks with their descriptions and completion status.
+- Add new tasks to the list.
+- Mark tasks as done or not done.
+- Delete tasks from the list.
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Before you begin, make sure you have the following installed on your system:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js: You can download it from [nodejs.org](https://nodejs.org/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Setup application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Install the required packages for both backend and frontend at the same time using the following command:
 
-### `npm run eject`
+### `npm install:both`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Start both the backend and frontend simultaneously using the following command:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `npm start:both`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The server should now be running at `http://localhost:4000`.
+The React app should now be running at `http://localhost:3000`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Open your web browser and go to `http://localhost:3000` to access the Task Manager app.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. You'll see a list of tasks. You can add new tasks by entering a description in the "Task description" input field and clicking the "Add Task" button.
+
+3. You can mark tasks as completed by checking the checkboxes next to them. You can also mark them as not completed by unchecking the checkboxes.
+
+4. To delete a task, click the "Delete" button next to it.
