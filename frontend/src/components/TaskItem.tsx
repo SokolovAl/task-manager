@@ -8,23 +8,22 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
+import {TaskItemProps} from "./interfaces/taskItemInterface";
 
-interface Task {
-    id: string;
-    text: string;
-    isDone: boolean;
-}
-
-interface TaskItemProps {
-    task: Task;
-    refetch: () => void
-}
-
+/**
+ * The TaskItem component represents an individual task in a task list.
+ * @param {TaskItemProps} props - Properties of the TaskItem component.
+ */
 export const TaskItem: React.FC<TaskItemProps> = ({task, refetch}) => {
     const [deleteTask] = useMutation(DELETE_TASK)
     const [updateTask] = useMutation(UPDATE_TASK)
 
-
+    /**
+     * Handler for updating a task status (done / not done)
+     * Sends a GraphQL mutation to update task status.
+     * After successfully updating a task status, it updates the state.
+     * In case of an error, displays the error in the console.
+     */
     const handleUpdateTask = async () => {
         try {
             await updateTask({
@@ -35,6 +34,12 @@ export const TaskItem: React.FC<TaskItemProps> = ({task, refetch}) => {
         }
     }
 
+    /**
+     * Handler for deleting a task.
+     * Sends a GraphQL mutation to remove a task.
+     * After successfully deleting a task, it updates the state and calls the refetch function to update the list of tasks.
+     * In case of an error, displays the error in the console.
+     */
     const handleDeleteTask = async () => {
         try {
             await deleteTask({

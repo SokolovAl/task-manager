@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
 import {TaskList} from "./components/TaskList";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-function App() {
+export const App = () => {
     return (
         <Box
             sx = {{
@@ -21,5 +20,3 @@ function App() {
         </Box>
     );
 }
-
-export default App;
