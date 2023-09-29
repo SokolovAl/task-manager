@@ -3,7 +3,6 @@ import {useMutation} from "@apollo/client";
 import {CREATE_TASK} from "../graphql/mutations";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 interface AddTaskProps {
@@ -43,7 +42,6 @@ export const AddTask: React.FC<AddTaskProps> = ({refetch}) => {
                 gap: 3
             }}
         >
-            <Typography variant = "h4">Add a New Task</Typography>
             <TextField
                 label = "Task description"
                 variant = "outlined"

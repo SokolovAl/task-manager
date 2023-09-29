@@ -26,12 +26,9 @@ export const TaskList: React.FC = () => {
     const tasks: Task[] = data.tasks;
 
     return (
-        <>
-            <List
-                sx={{
-                    minWidth:"30%"
-                }}
-            >
+        <Box>
+            <AddTask refetch = {refetch}/>
+            <List>
                 {tasks.map((task) => (
                     <TaskItem
                         key = {task.id}
@@ -40,7 +37,6 @@ export const TaskList: React.FC = () => {
                     />
                 ))}
             </List>
-            <AddTask refetch = {refetch}/>
-        </>
+        </Box>
     )
 }

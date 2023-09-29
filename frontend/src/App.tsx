@@ -16,7 +16,7 @@ function App() {
                 height: "100%",
             }}
         >
-            <Typography variant = "h4">Task List</Typography>
+            <Typography variant = "h4" sx = {{py: 4}}>Task List</Typography>
             <TaskList/>
         </Box>
     );
